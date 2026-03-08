@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Hotels - Tlemcen</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#f4f4f4;
+}
+
+nav{
+background:#2c7a7b;
+padding:15px;
+}
+
+nav a{
+color:white;
+margin-right:20px;
+text-decoration:none;
+font-size:18px;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+padding:30px;
+}
+
+.card{
+background:white;
+width:250px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+overflow:hidden;
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card h3{
+margin:10px;
+}
+
+.price{
+color:#2c7a7b;
+font-weight:bold;
+}
+
+.btn{
+display:inline-block;
+margin:10px;
+padding:8px 15px;
+background:#2c7a7b;
+color:white;
+text-decoration:none;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="/">Home</a>
+<a href="/hotels/">Hotels</a>
+<a href="/restaurants/">Restaurants</a>
+<a href="/places/">Places</a>
+
+</nav>
+
+<h1 style="text-align:center">Liste des Hôtels</h1>
+
+<div class="container">
+
+{% for hotel in hotels %}
+
+<div class="card">
+
+<img src="{{ hotel.image.url }}">
+
+<h3>{{ hotel.name }}</h3>
+
+<p class="price">{{ hotel.price }} DZD</p>
+
+<a class="btn" href="{{ hotel.google_maps_link }}" target="_blank">
+Google Maps
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

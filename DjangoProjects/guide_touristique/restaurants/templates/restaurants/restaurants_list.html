@@ -1,0 +1,13 @@
+<h1>Liste des Restaurants</h1>
+
+{% for r in restaurants %}
+    <div>
+        <h3>{{ r.name }}</h3>
+        <p>Wilaya: {{ r.wilaya }}</p>
+        <p>Prix: {{ r.price }}</p>
+
+        <a href="{{ r.google_maps_link }}" target="_blank">
+            Voir sur Google Maps
+        </a>
+    </div>
+{% endfor %}
