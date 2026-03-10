@@ -1,6 +1,6 @@
 from django.shortcuts import render # type: ignore
 from .models import Hotel
 
-def hotel_list(request):
+def index_hot(request):
     hotels = Hotel.objects.all()
-    return render(request, 'hotels/hotel_list.html', {'hotels': hotels})
+    return render(request, 'hotels/index_hot.html', {'hotels': hotels})
