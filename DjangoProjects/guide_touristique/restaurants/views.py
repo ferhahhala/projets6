@@ -1,6 +1,6 @@
 from django.shortcuts import render # pyright: ignore[reportMissingModuleSource]
 from .models import Restaurant
 
-def restaurant_list(request):
+def index_res(request):
     restaurants = Restaurant.objects.all()
-    return render(request, 'restaurants/restaurants_list.html', {'restaurants': restaurants})
+    return render(request, 'restaurants/index_res.html', {'restaurants': restaurants})
