@@ -2,6 +2,6 @@ from django.urls import path # type: ignore
 from . import views
 
 urlpatterns = [
-    path('', views.index_pl, name='places'),
+    path('', views.places_list, name='places'),
     
 ]
