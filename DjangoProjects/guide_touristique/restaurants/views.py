@@ -1,6 +1,19 @@
-from django.shortcuts import render # pyright: ignore[reportMissingModuleSource]
+from django.shortcuts import render
 from .models import Restaurant
 
-def restaurents_list(request):
+def restaurant_list(request):
+    wilaya = request.GET.get('wilaya')
+
     restaurants = Restaurant.objects.all()
-    return render(request, 'restaurants/index_res.html', {'restaurants': restaurants})
+    if wilaya:
+        restaurants = restaurants.filter(wilaya__icontains=wilaya)
+
+    # ترتيب تلقائي حسب السعر تصاعديًا
+    restaurants = restaurants.order_by('price')
+
+    return render(request, 'core/list_template.html', {
+        'items': restaurants,
+        'wilaya': wilaya,
+        'category_name': 'Restaurants',
+        'max_price': None
+    })

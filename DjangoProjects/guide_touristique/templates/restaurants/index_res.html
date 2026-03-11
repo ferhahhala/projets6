@@ -1,23 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}Restaurants à {{ wilaya }}{% endblock %}
+
 {% block content %}
+<h2>Restaurants à {{ wilaya }}</h2>
 
-<h2>Restaurants</h2>
+<form method="get">
+  <input type="hidden" name="wilaya" value="{{ wilaya }}">
+  <label>Max Price:</label>
+  <input type="number" name="max_price" value="{{ max_price|default:'' }}">
+  <button type="submit">Filtrer</button>
+</form>
 
-{% for restaurant in restaurants %}
-
-<div>
-
-<h3>{{ restaurant.name }}</h3>
-
-<p>{{ restaurant.description }}</p>
-
-<img src="{{image.photo1 }}" width="200">
-
+<div class="cards">
+  {% for r in restaurants %}
+  <div class="card">
+    <img src="{{ r.image.url }}" alt="{{ r.name }}" width="200">
+    <h3>{{ r.name }}</h3>
+    <p>Prix: {{ r.price }}</p>
+    <a href="{{ r.google_maps_link }}" target="_blank">Voir sur Google Maps</a>
+  </div>
+  {% endfor %}
 </div>
-
-<hr>
-
-{% endfor %}
-
 {% endblock %}

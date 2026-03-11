@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Guide Touristique</title>
+    <style>
+        .cards { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { border: 1px solid #ccc; padding: 10px; width: 200px; }
+    </style>
 </head>
-
 <body>
+    <header>
+        <h1>Guide Touristique</h1>
+        <nav>
+            <a href="/">Accueil</a>
+        </nav>
+    </header>
 
-<h1>Guide Touristique</h1>
-
-<nav>
-<a href="/">Home</a> |
-<a href="/hotels/">Hotels</a> |
-<a href="/restaurants/">Restaurants</a> |
-<a href="/places/">Places</a>
-</nav>
-
-<hr>
-
-{% block content %}
-{% endblock %}
-
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>

@@ -1,6 +1,19 @@
-from django.shortcuts import render # type: ignore
+from django.shortcuts import render
 from .models import Hotel
 
-def hotels_list(request):
+def hotel_list(request):
+    wilaya = request.GET.get('wilaya')
+
     hotels = Hotel.objects.all()
-    return render(request, 'hotels/index_hot.html', {'hotels': hotels})
+    if wilaya:
+        hotels = hotels.filter(wilaya__icontains=wilaya)
+
+    # ترتيب تلقائي حسب السعر تصاعديًا
+    hotels = hotels.order_by('price')
+
+    return render(request, 'core/list_template.html', {
+        'items': hotels,
+        'wilaya': wilaya,
+        'category_name': 'Hotels',
+        'max_price': None
+    })

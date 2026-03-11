@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 
+{% block title %}Places à {{ wilaya }}{% endblock %}
+
 {% block content %}
+<h1 class="mb-4">Places à {{ wilaya }}</h1>
 
-<h2>Tourist Places</h2>
-
-{% for place in places %}
-
-<div>
-
-<h3>{{ place.name }}</h3>
-
-<p>{{ place.description }}</p>
-
-<img src="{{ place.image.url }}" width="200">
-
+<div class="row">
+    {% for p in places %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <img src="{{ p.image.url }}" class="card-img-top" alt="{{ p.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ p.name }}</h5>
+                <p class="card-text">{{ p.description|truncatewords:20 }}</p>
+                <a href="{{ p.google_maps_link }}" target="_blank" class="btn btn-primary">Google Maps</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>Aucun endroit trouvé.</p>
+    {% endfor %}
 </div>
-
-<hr>
-
-{% endfor %}
-
 {% endblock %}

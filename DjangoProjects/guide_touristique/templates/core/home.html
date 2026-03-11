@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Choisissez votre Wilaya et Catégorie</h1>
+<form method="POST">
+  {% csrf_token %}
+  <div>
+    <label>Wilaya:</label>
+    <select name="wilaya" required>
+      {% for w in wilayas %}
+      <option value="{{ w.id }}">{{ w.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label>Category:</label>
+    <select name="category" required>
+      {% for c in categories %}
+      <option value="{{ c.id }}">{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit">Voir</button>
+</form>
+{% endblock %}
