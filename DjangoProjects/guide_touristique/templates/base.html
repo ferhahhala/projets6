@@ -40,10 +40,36 @@
 {% block content %}{% endblock %}
 </main>
 
-<!-- FOOTER (اختياري، لتكراره في كل الصفحات) -->
+{% if show_footer %}
 <footer class="footer">
-    <p>© 2026 ALGuide - Guide Touristique Algérie</p>
+    <div class="footer-container">
+
+        <div>
+            <h3>ALGuide</h3>
+            <p>Votre portail premium pour découvrir la beauté, la culture et les hôtels de Tlemcen.</p>
+        </div>
+
+        <div>
+            <h3>Liens rapides</h3>
+            <a href="{% url 'home' %}">Accueil</a>
+            <a href="{% url 'restaurant_list' %}">Restaurants</a>
+            <a href="{% url 'hotel_list' %}">Hôtels</a>
+            <a href="{% url 'place_list' %}">Places</a>
+        </div>
+
+        <div>
+            <h3>Contact</h3>
+            <p>contact@guide-tlemcen.dz</p>
+            <p>+213 XX XX XX XX</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 ALGuide - Guide Touristique Algérie
+    </div>
 </footer>
+{% endif %}
 
 <script src="{% static 'js/main.js' %}"></script>
 {% block extra_js %}{% endblock %}

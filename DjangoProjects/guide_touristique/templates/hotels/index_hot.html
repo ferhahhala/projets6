@@ -25,21 +25,33 @@
 
 <section class="hotels">
     <div class="hotels-container">
+
         {% for hotel in items %}
-        <div class="hotel-card" onclick="window.open('{{ hotel.google_maps_link }}','_blank')">
-            
+        <div class="hotel-card">
+
             {% if hotel.image %}
                 <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}">
             {% else %}
-                <img src="{% static 'images/default-hotel.jpg' %}" alt="default">
+                <img src="{% static 'images/default-hotel.jpg' %}">
             {% endif %}
 
-            <h3>{{ hotel.name }}</h3>
+            <!-- ✅ IMPORTANT -->
+            <div class="hotel-content">
+                <h3>{{ hotel.name }}</h3>
+
+                <!-- description from backend -->
+                <p>{{ hotel.description|truncatewords:15 }}</p>
+
+                <a href="{{ hotel.google_maps_link }}" target="_blank" class="map-btn">
+                    📍Voir sur Maps
+                </a>
+            </div>
 
         </div>
         {% empty %}
-        <p>Aucun hôtel trouvé pour cette Wilaya.</p>
+        <p>Aucun hôtel trouvé.</p>
         {% endfor %}
+
     </div>
 </section>
 

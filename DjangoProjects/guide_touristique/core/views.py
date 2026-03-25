@@ -9,7 +9,7 @@ def home(request):
         wilaya = Wilaya.objects.get(id=wilaya_id)
         return redirect(f'/categories/?wilaya={wilaya.name}')
 
-    return render(request, 'core/home.html', {'wilayas': wilayas})
+    return render(request, 'core/home.html', {'wilayas': wilayas,'show_footer': False})
 
 
 def categories(request):
@@ -31,5 +31,6 @@ def categories(request):
             return redirect(f'/places/?wilaya={wilaya_name}')
 
     return render(request, 'core/categories.html', {
-        'wilaya_name': wilaya_name
+        'wilaya_name': wilaya_name,
+        'show_footer': False
     })

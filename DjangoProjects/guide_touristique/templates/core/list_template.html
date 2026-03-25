@@ -3,14 +3,42 @@
 
 {% block title %}{{ category_name }} à {{ wilaya }}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/hotels.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
+
     <span class="tag">EXPLORER L'ALGÉRIE</span>
-    <h1>{{ category_name }} de la Wilaya {{ wilaya }}</h1>
-    <p>Découvrez les meilleurs {{ category_name|lower }} disponibles.</p>
+
+    <h1>{{ category_name }} de {{ wilaya }}</h1>
+
+    <p>Découvrez les meilleurs {{ category_name|lower }}</p>
+
+    <!-- 🔥 SEARCH BAR داخل الهيرو -->
+    <div class="search-container">
+        <form method="GET">
+
+            <input type="hidden" name="wilaya" value="{{ wilaya }}">
+
+            <input 
+                type="text" 
+                name="q" 
+                placeholder="Rechercher {{ category_name|lower }} à {{ wilaya }}"
+                value="{{ query|default:'' }}"
+            >
+
+            <button type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+
+        </form>
+    </div>
+
   </div>
 </section>
 
@@ -20,22 +48,41 @@
 </section>
 
 <!-- CARDS -->
-<section class="items-container">
-  {% for item in items %}
-    <div class="card" onclick="window.open('{{ item.google_maps_link }}','_blank')">
+<section class="hotels">
+  <div class="hotels-container">
+
+    {% for item in items %}
+    <div class="hotel-card">
 
       {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+        <img src="{{ item.image.url }}">
       {% else %}
-        <img src="{% static 'images/default.jpg' %}" alt="default">
+        <img src="{% static 'images/default.jpg' %}">
       {% endif %}
 
-      <h3>{{ item.name }}</h3>
+      <div class="hotel-content">
+        <h3>{{ item.name }}</h3>
+
+        {% if item.description %}
+          <p>{{ item.description|truncatewords:15 }}</p>
+        {% endif %}
+
+        {% if item.google_maps_link %}
+        <a href="{{ item.google_maps_link }}" target="_blank" class="map-btn">
+          📍 Voir sur Maps
+        </a>
+        {% endif %}
+
+      </div>
 
     </div>
-  {% empty %}
-    <p>Aucun {{ category_name|lower }} trouvé pour cette Wilaya.</p>
-  {% endfor %}
+    {% empty %}
+      <p style="text-align:center;color:#aaa;">
+        Aucun {{ category_name|lower }} trouvé.
+      </p>
+    {% endfor %}
+
+  </div>
 </section>
 
 {% endblock %}

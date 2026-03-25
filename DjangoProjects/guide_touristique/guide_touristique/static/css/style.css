@@ -252,16 +252,52 @@ select#wilayaSelect:focus {
 
 /* ================= FOOTER ================= */
 .footer {
-    background-color: #111;
+    background: #000;
+    color: #ccc;
+    padding: 60px 80px 20px;
+}
+
+/* ✅ هذا هو المهم */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* كل colonne */
+.footer-container > div {
+    flex: 1;
+    min-width: 0;   /* ✅ مهم جداً */
+}
+
+.footer h3 {
     color: #d4af37;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    border-top: 1px solid #222;
+    margin-bottom: 15px;
 }
 
 .footer p {
-    margin: 0;
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #666;
+}
+.footer a {
+    display: block;   /* ✅ هذا هو الحل */
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #d4af37;
 }
 
 /* ================= RESPONSIVE ================= */
