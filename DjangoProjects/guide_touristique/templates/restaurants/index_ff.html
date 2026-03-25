@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fast Food - {{ wilaya|default:"Algérie" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/fastfood.css' %}">
+{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">EXPLORER L'ALGÉRIE</span>
+        <h1>Fast Food de {{ wilaya|default:"la Wilaya" }}</h1>
+        <p>Découvrez les meilleurs fast-foods de la ville. Une sélection de burgers, tacos, pizzas et snacks délicieux.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+
+<!-- FAST FOOD GRID -->
+<section class="restaurants-container">
+    {% for ff in items %}
+    <div class="card">
+        <img src="{{ ff.image.url }}" alt="{{ ff.name }}">
+        <div class="card-content">
+            <h3>{{ ff.name }}</h3>
+            <p>{{ ff.description|truncatewords:20 }}</p>
+            <a href="{{ ff.google_maps_link }}" target="_blank">📍 Voir sur Google Maps</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Aucun fast-food trouvé pour cette Wilaya.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

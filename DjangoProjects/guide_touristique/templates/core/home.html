@@ -1,29 +1,30 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil - ALGuide{% endblock %}
 
-{% block content %}
-<h1 class="mb-4">Choisissez votre Wilaya et Catégorie</h1>
-<form method="POST">
-  {% csrf_token %}
-  <div>
-    <label>Wilaya:</label>
-    <select name="wilaya" required>
-      {% for w in wilayas %}
-      <option value="{{ w.id }}">{{ w.name }}</option>
-      {% endfor %}
-    </select>
-  </div>
+{% block hero %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">EXPLORER L'ALGÉRIE</span>
+        <h1 class="fade-in">Découvrez l'Algérie autrement</h1>
+        <p class="fade-in">Choisissez votre Wilaya et explorez les meilleures destinations</p>
 
-  <div>
-    <label>Category:</label>
-    <select name="category" required>
-      {% for c in categories %}
-      <option value="{{ c.id }}">{{ c.name }}</option>
-      {% endfor %}
-    </select>
-  </div>
+        <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            <select name="wilaya" id="wilayaSelect" required>
+                <option value="">Sélectionner une Wilaya</option>
+                {% for wilaya in wilayas %}
+                    <option value="{{ wilaya.id }}">{{ wilaya.name }}</option>
+                {% endfor %}
+            </select>
 
-  <button type="submit">Voir</button>
-</form>
+            <button type="submit" id="exploreBtn" class="explore-btn">Explorer</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/controller.js' %}"></script>
 {% endblock %}

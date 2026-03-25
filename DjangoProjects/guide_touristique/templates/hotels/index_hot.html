@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Hotels à {{ wilaya }}{% endblock %}
+{% block title %}Hôtels - {{ wilaya|default:"Algérie" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/hotels.css' %}">
+{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">EXPLORER L'ALGÉRIE</span>
+        <h1>Hôtels de {{ wilaya|default:"la Wilaya" }}</h1>
+        <p>Découvrez les meilleurs hôtels de la ville.</p>
+    </div>
+</section>
+{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Hotels à {{ wilaya }}</h1>
 
-<form method="get" class="row g-3 mb-4">
-    <input type="hidden" name="wilaya" value="{{ wilaya }}">
-    <div class="col-md-3">
-        <input type="number" name="max_price" class="form-control" placeholder="Prix max" value="{{ request.GET.max_price }}">
-    </div>
-    <div class="col-md-3">
-        <button type="submit" class="btn btn-success w-100">Filtrer</button>
-    </div>
-</form>
+<section class="section-title">
+    <h2>Notre sélection</h2>
+</section>
 
-<div class="row">
-    {% for h in hotels %}
-    <div class="col-md-4 mb-3">
-        <div class="card">
-            <img src="{{ h.image.url }}" class="card-img-top" alt="{{ h.name }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ h.name }}</h5>
-                <p class="card-text">Prix: {{ h.price }} DA</p>
-                <a href="{{ h.google_maps_link }}" target="_blank" class="btn btn-primary">Google Maps</a>
-            </div>
+<section class="hotels">
+    <div class="hotels-container">
+        {% for hotel in items %}
+        <div class="hotel-card" onclick="window.open('{{ hotel.google_maps_link }}','_blank')">
+            
+            {% if hotel.image %}
+                <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}">
+            {% else %}
+                <img src="{% static 'images/default-hotel.jpg' %}" alt="default">
+            {% endif %}
+
+            <h3>{{ hotel.name }}</h3>
+
         </div>
+        {% empty %}
+        <p>Aucun hôtel trouvé pour cette Wilaya.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>Aucun hôtel trouvé.</p>
-    {% endfor %}
-</div>
+</section>
+
 {% endblock %}

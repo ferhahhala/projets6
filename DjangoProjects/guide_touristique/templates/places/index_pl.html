@@ -1,24 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Places à {{ wilaya }}{% endblock %}
+{% block title %}Places Touristiques - {{ wilaya|default:"Algérie" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/places.css' %}">
+{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">EXPLORER L'ALGÉRIE</span>
+        <h1>Places Touristiques de {{ wilaya|default:"la Wilaya" }}</h1>
+        <p>Découvrez les monuments et lieux historiques qui font la beauté et la richesse culturelle de {{ wilaya|default:"l'Algérie" }}.</p>
+    </div>
+</section>
+{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Places à {{ wilaya }}</h1>
 
-<div class="row">
-    {% for p in places %}
-    <div class="col-md-4 mb-3">
-        <div class="card">
-            <img src="{{ p.image.url }}" class="card-img-top" alt="{{ p.name }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ p.name }}</h5>
-                <p class="card-text">{{ p.description|truncatewords:20 }}</p>
-                <a href="{{ p.google_maps_link }}" target="_blank" class="btn btn-primary">Google Maps</a>
-            </div>
+<!-- SEARCH BOX -->
+<div class="search-box">
+    <input type="text" placeholder="Rechercher...">
+    <i class="fa-solid fa-magnifying-glass"></i>
+</div>
+
+<!-- PLACES GRID -->
+<section class="places-container">
+    {% for place in places %}
+    <div class="card">
+        <img src="{{ place.image.url }}" alt="{{ place.name }}">
+        <div class="card-content">
+            <h3>{{ place.name }}</h3>
+            <p>{{ place.description|truncatewords:20 }}</p>
+            <a href="{{ place.google_maps_link }}" target="_blank">📍 Voir sur Google Maps</a>
         </div>
     </div>
     {% empty %}
-    <p>Aucun endroit trouvé.</p>
+    <p>Aucun endroit trouvé pour cette Wilaya.</p>
     {% endfor %}
-</div>
+</section>
+
 {% endblock %}

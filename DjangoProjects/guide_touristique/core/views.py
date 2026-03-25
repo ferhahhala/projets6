@@ -1,18 +1,35 @@
 from django.shortcuts import render, redirect
-from .models import Wilaya, Category
+from .models import Wilaya
 
 def home(request):
     wilayas = Wilaya.objects.all()
-    categories = Category.objects.all()
 
     if request.method == 'POST':
         wilaya_id = request.POST.get('wilaya')
-        category_id = request.POST.get('category')
-
         wilaya = Wilaya.objects.get(id=wilaya_id)
-        category = Category.objects.get(id=category_id)
+        return redirect(f'/categories/?wilaya={wilaya.name}')
 
-        # تحويل الاسم إلى lowercase للـ URL
-        return redirect(f'/{category.name.lower()}/?wilaya={wilaya.name}')
+    return render(request, 'core/home.html', {'wilayas': wilayas})
 
-    return render(request, 'core/home.html', {'wilayas': wilayas, 'categories': categories})
+
+def categories(request):
+    wilaya_name = request.GET.get('wilaya')
+
+    if request.method == 'POST':
+        category = request.POST.get('category')
+
+        if category == 'fastfood':
+            return redirect(f'/restaurants/?wilaya={wilaya_name}&type=fastfood')
+
+        elif category == 'restaurants':
+            return redirect(f'/restaurants/?wilaya={wilaya_name}&type=restaurant')
+
+        elif category == 'hotels':
+            return redirect(f'/hotels/?wilaya={wilaya_name}')
+
+        elif category == 'places':
+            return redirect(f'/places/?wilaya={wilaya_name}')
+
+    return render(request, 'core/categories.html', {
+        'wilaya_name': wilaya_name
+    })

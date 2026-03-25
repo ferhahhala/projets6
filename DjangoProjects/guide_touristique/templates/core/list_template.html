@@ -1,18 +1,41 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category_name }} à {{ wilaya }}{% endblock %}
 
 {% block content %}
-<h2>{{ category_name }} à {{ wilaya }}</h2>
 
-<div class="cards">
-    {% for item in items %}
-    <div class="card">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}" width="200">
-        <h3>{{ item.name }}</h3>
-        {% if item.price %}
-        <p>Prix: {{ item.price }}</p>
-        {% endif %}
-        <a href="{{ item.google_maps_link }}" target="_blank">Voir sur Google Maps</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="tag">EXPLORER L'ALGÉRIE</span>
+    <h1>{{ category_name }} de la Wilaya {{ wilaya }}</h1>
+    <p>Découvrez les meilleurs {{ category_name|lower }} disponibles.</p>
+  </div>
+</section>
+
+<!-- TITLE -->
+<section class="section-title">
+  <h2>Notre sélection</h2>
+</section>
+
+<!-- CARDS -->
+<section class="items-container">
+  {% for item in items %}
+    <div class="card" onclick="window.open('{{ item.google_maps_link }}','_blank')">
+
+      {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+      {% else %}
+        <img src="{% static 'images/default.jpg' %}" alt="default">
+      {% endif %}
+
+      <h3>{{ item.name }}</h3>
+
     </div>
-    {% endfor %}
-</div>
+  {% empty %}
+    <p>Aucun {{ category_name|lower }} trouvé pour cette Wilaya.</p>
+  {% endfor %}
+</section>
+
 {% endblock %}

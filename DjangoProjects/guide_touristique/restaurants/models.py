@@ -11,6 +11,7 @@ class Restaurant(models.Model):
     image = models.ImageField(upload_to='restaurants/')
     google_maps_link = models.URLField()
     price = models.IntegerField()
+    description = models.TextField(default="Aucune description disponible.")  # <-- ajouté
 
     def __str__(self):
         return self.name
