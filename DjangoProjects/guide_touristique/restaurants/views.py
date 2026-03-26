@@ -18,13 +18,11 @@ def restaurant_list(request):
     if query:
         restaurants = restaurants.filter(name__icontains=query)
 
-    restaurants = restaurants.order_by('price')
 
     return render(request, 'core/list_template.html', {
         'items': restaurants,
         'wilaya': wilaya,
         'query': query,   # 🔥 مهم باش يرجع في input
         'category_name': r_type.capitalize() if r_type else 'Restaurants',
-        'max_price': None,
         'show_footer': True
     })

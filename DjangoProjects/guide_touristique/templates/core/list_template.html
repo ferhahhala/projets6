@@ -53,6 +53,9 @@
 
     {% for item in items %}
     <div class="hotel-card">
+      {% if item.price %}
+           <p class="price-badge">{{ item.price }} DA</p>
+        {% endif %}
 
       {% if item.image %}
         <img src="{{ item.image.url }}">
@@ -62,9 +65,7 @@
 
       <div class="hotel-content">
         <h3>{{ item.name }}</h3>
-        {% if item.price %}
-           <p class="price">{{ item.price }} DA</p>
-        {% endif %}
+        
         {% if item.description %}
           <p>{{ item.description|truncatewords:15 }}</p>
         {% endif %}

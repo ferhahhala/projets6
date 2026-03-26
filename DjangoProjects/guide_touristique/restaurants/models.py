@@ -10,7 +10,6 @@ class Restaurant(models.Model):
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='restaurant')
     image = models.ImageField(upload_to='restaurants/')
     google_maps_link = models.URLField()
-    price = models.IntegerField()
     description = models.TextField(default="Aucune description disponible.")  # <-- ajouté
 
     def __str__(self):
