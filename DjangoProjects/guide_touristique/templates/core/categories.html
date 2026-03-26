@@ -1,58 +1,28 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Catégories | ALGuide{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/categorie.css' %}">
-{% endblock %}
-
-{% block hero %}
-<section class="hero">
+{% extends 'base.html' %} {% load static %} {% block title %}Catégories | ALGuide{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/categorie.css' %}"> {% endblock %} {% block hero %} <section class="hero">
     <h1>Découvrez La Wilaya</h1>
     <p>Choisissez une catégorie</p>
-    <p class="home-desc">
-    Explorez les meilleurs endroits de votre wilaya : hôtels, restaurants et lieux incontournables.
-</p>
-</section>
-{% endblock %}
-
-{% block content %}
-<section class="categories">
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="wilaya" value="{{ wilaya_name }}">
-
-        <div class="card" onclick="selectCategory('hotels')">
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
+    <p class="home-desc"> Explorez les meilleurs endroits de votre wilaya : hôtels, restaurants et lieux
+        incontournables. </p>
+</section> {% endblock %} {% block content %} <section class="categories">
+    <form method="post"> {% csrf_token %} <input type="hidden" name="wilaya" value="{{ wilaya_name }}">
+        <div class="card" onclick="selectCategory('hotels')"> <img
+                src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
             <h3>Hôtels</h3>
         </div>
-
-        <div class="card" onclick="selectCategory('restaurants')">
-            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de">
+        <div class="card" onclick="selectCategory('restaurants')"> <img
+                src="https://images.unsplash.com/photo-1559339352-11d035aa65de">
             <h3>Restaurants</h3>
         </div>
-
-        <div class="card" onclick="selectCategory('fastfood')">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+        <div class="card" onclick="selectCategory('fastfood')"> <img
+                src="https://images.unsplash.com/photo-1550547660-d9450f859349">
             <h3>Fast Food</h3>
         </div>
-
-        <div class="card" onclick="selectCategory('places')">
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+        <div class="card" onclick="selectCategory('places')"> <img
+                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
             <h3>Places</h3>
-        </div>
-
-        <input type="hidden" name="category" id="categoryInput">
+        </div> <input type="hidden" name="category" id="categoryInput">
     </form>
-</section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-function selectCategory(cat){
-    document.getElementById('categoryInput').value = cat;
-    document.querySelector('form').submit();
-}
-</script>
+</section> {% endblock %} {% block extra_js %}
+<script> function selectCategory(cat) { document.getElementById('categoryInput').value = cat; document.querySelector('form').submit(); } </script>
 {% endblock %}
