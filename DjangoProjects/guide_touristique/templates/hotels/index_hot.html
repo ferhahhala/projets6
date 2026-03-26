@@ -38,7 +38,10 @@
             <!-- ✅ IMPORTANT -->
             <div class="hotel-content">
                 <h3>{{ hotel.name }}</h3>
-
+            <!--le prix-->
+                {% if item.price %}
+                  <p class="price">{{ item.price }} DA</p>
+                      {% endif %}
                 <!-- description from backend -->
                 <p>{{ hotel.description|truncatewords:15 }}</p>
 

@@ -155,6 +155,13 @@ font-size:14px;
     height:200px;
     object-fit:cover;
 }
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 8px 0;
+}
+
 
 /* CARD CONTENT */
 .card-content{

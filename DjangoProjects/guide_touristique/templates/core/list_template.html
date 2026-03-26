@@ -62,7 +62,9 @@
 
       <div class="hotel-content">
         <h3>{{ item.name }}</h3>
-
+        {% if item.price %}
+           <p class="price">{{ item.price }} DA</p>
+        {% endif %}
         {% if item.description %}
           <p>{{ item.description|truncatewords:15 }}</p>
         {% endif %}

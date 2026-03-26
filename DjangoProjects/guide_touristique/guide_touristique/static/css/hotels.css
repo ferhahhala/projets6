@@ -130,6 +130,12 @@ body {
     background: #d4af37;
     color: black;
 }
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 8px 0;
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1000px) {
