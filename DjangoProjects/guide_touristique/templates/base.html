@@ -40,7 +40,10 @@
             </div>
         </div>
         <div class="footer-bottom"> © 2026 ALGuide - Guide Touristique Algérie </div>
-    </footer> {% endif %}
+    </footer> 
+    {%else%}
+    <div class="footer-bottom"> © 2026 ALGuide - Guide Touristique Algérie </div>
+    {% endif %}
     <script src="{% static 'js/main.js' %}"></script> {% block extra_js %}{% endblock %}
 </body>
 
