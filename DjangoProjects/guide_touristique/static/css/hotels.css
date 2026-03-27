@@ -13,12 +13,14 @@ body {
 
 /* ================= HERO ================= */
 .hero {
-    height: 40vh;
+    min-height: 40vh; /* بدل height */
+    padding: 40px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: radial-gradient(circle, rgba(212,175,55,0.15), black);
     text-align: center;
+    position: relative;
 }
 
 .hero h1 {
@@ -150,6 +152,67 @@ body {
     font-size: 14px;
     z-index: 10;
 }
+/* ===== FILTER SECTION ===== */
+/* ===== FILTER SECTION FIX ===== */
+.filter-section {
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+
+    position: relative; /* ❌ كان absolute */
+    z-index: 10;
+}
+
+/* ===== GLASS FILTER ===== */
+.glass-filter {
+    display: flex;
+    gap: 15px;
+    padding: 15px 25px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== INPUT GROUP ===== */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #111;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.input-group span {
+    margin-right: 8px;
+}
+
+/* ===== INPUT ===== */
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: white;
+}
+
+/* ===== BUTTON ===== */
+.glass-filter button {
+    background: gold;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.glass-filter button:hover {
+    background: orange;
+}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1000px) {
@@ -166,5 +229,19 @@ body {
 
     .hero h1 {
         font-size: 30px;
+    }
+}
+@media (max-width: 768px) {
+    .glass-filter {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+
+    .glass-filter button {
+        width: 100%;
     }
 }

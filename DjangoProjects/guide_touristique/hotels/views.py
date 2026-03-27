@@ -3,26 +3,31 @@ from .models import Hotel
 
 def hotel_list(request):
     wilaya = request.GET.get('wilaya')
-    query = request.GET.get('q','')   # 🔥 هذا الجديد
+    query = request.GET.get('q', '')
+    max_price = request.GET.get('max_price')  # 🔥 أضف هذا
 
     hotels = Hotel.objects.all()
 
-    # فلترة بالولاية
+    # 📍 filtre wilaya
     if wilaya:
         hotels = hotels.filter(wilaya__icontains=wilaya)
 
-    # 🔥 فلترة بالاسم (search)
+    # 🔍 search
     if query:
-     hotels = hotels.filter(name__icontains=query)
+        hotels = hotels.filter(name__icontains=query)
 
-    # ترتيب حسب السعر
+    # 💰 filtre prix
+    if max_price:
+        hotels = hotels.filter(price__lte=max_price)
+
+    # 🔥 ترتيب
     hotels = hotels.order_by('price')
 
     return render(request, 'core/list_template.html', {
         'items': hotels,
         'wilaya': wilaya,
-        'query': query,   # 🔥 مهم باش يبقى مكتوب في input
+        'query': query,
+        'max_price': max_price,  # 🔥 مهم
         'category_name': 'Hotels',
-        'max_price': None,
         'show_footer': True
     })

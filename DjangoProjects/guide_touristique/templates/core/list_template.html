@@ -1,91 +1,125 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ category_name }} à {{ wilaya }}{% endblock %}
+{% block title %}{{ category_name }} - {{ wilaya|default:"Algérie" }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/hotels.css' %}">
 {% endblock %}
 
+<!-- HERO -->
+{% block hero %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">EXPLORER L'ALGÉRIE</span>
+        <h1 class="fade-in">{{ category_name }} de {{ wilaya|default:"la Wilaya" }}</h1>
+        <p class="fade-in">Découvrez les meilleurs {{ category_name|lower }} de la ville.</p>
+    </div>
+</section>
+{% endblock %}
+
 {% block content %}
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
+<!-- ✅ FILTER يظهر غير في Hotels -->
+{% if category_name == "Hotels" %}
+<!-- 🔥 HOTELS FILTER -->
+<section class="filter-section">
+  <form method="GET" class="glass-filter">
 
-    <span class="tag">EXPLORER L'ALGÉRIE</span>
+    <input type="hidden" name="wilaya" value="{{ wilaya }}">
 
-    <h1>{{ category_name }} de {{ wilaya }}</h1>
-
-    <p>Découvrez les meilleurs {{ category_name|lower }}</p>
-
-    <!-- 🔥 SEARCH BAR داخل الهيرو -->
-    <div class="search-container">
-        <form method="GET">
-
-            <input type="hidden" name="wilaya" value="{{ wilaya }}">
-
-            <input 
-                type="text" 
-                name="q" 
-                placeholder="Rechercher {{ category_name|lower }} à {{ wilaya }}"
-                value="{{ query|default:'' }}"
-            >
-
-            <button type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-
-        </form>
+    <div class="input-group">
+      <span>🔍</span>
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Rechercher hôtel..." 
+        value="{{ query }}"
+      >
     </div>
 
-  </div>
+    <div class="input-group">
+      <span>💰</span>
+      <input 
+        type="number" 
+        name="max_price" 
+        placeholder="Prix max" 
+        value="{{ max_price }}"
+      >
+    </div>
+
+    <button type="submit">Filtrer</button>
+
+  </form>
 </section>
+
+{% else %}
+<!-- 🍔 RESTO / FASTFOOD FILTER -->
+<section class="filter-section">
+  <form method="GET" class="glass-filter">
+
+    <input type="hidden" name="wilaya" value="{{ wilaya }}">
+
+    <div class="input-group">
+      <span>🔍</span>
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Rechercher {{ category_name|lower }}..."
+        value="{{ query }}"
+      >
+    </div>
+
+    <button type="submit">Rechercher</button>
+
+  </form>
+</section>
+{% endif %}
 
 <!-- TITLE -->
 <section class="section-title">
-  <h2>Notre sélection</h2>
+    <h2>Notre sélection</h2>
 </section>
 
 <!-- CARDS -->
 <section class="hotels">
-  <div class="hotels-container">
+    <div class="hotels-container">
 
-    {% for item in items %}
-    <div class="hotel-card">
-      {% if item.price %}
-           <p class="price-badge">{{ item.price }} DA</p>
-        {% endif %}
+        {% for item in items %}
+        <div class="hotel-card">
 
-      {% if item.image %}
-        <img src="{{ item.image.url }}">
-      {% else %}
-        <img src="{% static 'images/default.jpg' %}">
-      {% endif %}
+            {% if item.price %}
+                <p class="price-badge">{{ item.price }} DA</p>
+            {% endif %}
 
-      <div class="hotel-content">
-        <h3>{{ item.name }}</h3>
-        
-        {% if item.description %}
-          <p>{{ item.description|truncatewords:15 }}</p>
-        {% endif %}
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+                <img src="{% static 'images/default-hotel.jpg' %}">
+            {% endif %}
 
-        {% if item.google_maps_link %}
-        <a href="{{ item.google_maps_link }}" target="_blank" class="map-btn">
-          📍 Voir sur Maps
-        </a>
-        {% endif %}
+            <div class="hotel-content">
+                <h3>{{ item.name }}</h3>
 
-      </div>
+                {% if item.description %}
+                <p>{{ item.description|truncatewords:15 }}</p>
+                {% endif %}
+
+                {% if item.google_maps_link %}
+                <a href="{{ item.google_maps_link }}" target="_blank" class="map-btn">
+                    📍Voir sur Maps
+                </a>
+                {% endif %}
+            </div>
+
+        </div>
+        {% empty %}
+        <p style="text-align:center;">
+            Aucun {{ category_name|lower }} trouvé.
+        </p>
+        {% endfor %}
 
     </div>
-    {% empty %}
-      <p style="text-align:center;color:#aaa;">
-        Aucun {{ category_name|lower }} trouvé.
-      </p>
-    {% endfor %}
-
-  </div>
 </section>
 
 {% endblock %}

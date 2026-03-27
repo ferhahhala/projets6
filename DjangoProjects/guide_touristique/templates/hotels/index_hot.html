@@ -11,11 +11,43 @@
 <section class="hero">
     <div class="hero-content">
         <span class="tag">EXPLORER L'ALGÉRIE</span>
-        <h1>Hôtels de {{ wilaya|default:"la Wilaya" }}</h1>
-        <p>Découvrez les meilleurs hôtels de la ville.</p>
+        <h1 class="fade-in">Hôtels de {{ wilaya|default:"la Wilaya" }}</h1>
+        <p class="fade-in">Découvrez les meilleurs hôtels de la ville.</p>
     </div>
 </section>
 {% endblock %}
+
+{%blockfiltreprix%}
+<section class="filter-section">
+  <form method="GET" class="glass-filter">
+
+    <input type="hidden" name="wilaya" value="{{ wilaya }}">
+
+    <div class="input-group">
+      <span>🔍</span>
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Rechercher hôtel..." 
+        value="{{ query }}"
+      >
+    </div>
+
+    <div class="input-group">
+      <span>💰</span>
+      <input 
+        type="number" 
+        name="max_price" 
+        placeholder="Prix max" 
+        value="{{ max_price }}"
+      >
+    </div>
+
+    <button type="submit">Filtrer</button>
+
+  </form>
+</section>
+{%endblock%}
 
 {% block content %}
 
@@ -40,7 +72,7 @@
                 <h3>{{ hotel.name }}</h3>
             <!--le prix-->
                 {% if hotel.price %}
-                  <p class="price">{{ hotel.price }} DA</p>
+                  <p class="price-badge">{{ hotel.price }} DA</p>
                       {% endif %}
                 <!-- description from backend -->
                 <p>{{ hotel.description|truncatewords:15 }}</p>
