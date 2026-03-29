@@ -13,24 +13,24 @@ def home(request):
 
 
 def categories(request):
-    wilaya_name = request.GET.get('wilaya')
+    wilaya = request.GET.get('wilaya')
 
     if request.method == 'POST':
         category = request.POST.get('category')
 
         if category == 'fastfood':
-            return redirect(f'/restaurants/?wilaya={wilaya_name}&type=fastfood')
+            return redirect(f'/restaurants/?wilaya={wilaya}&type=fastfood')
 
         elif category == 'restaurants':
-            return redirect(f'/restaurants/?wilaya={wilaya_name}&type=restaurant')
+            return redirect(f'/restaurants/?wilaya={wilaya}&type=restaurant')
 
         elif category == 'hotels':
-            return redirect(f'/hotels/?wilaya={wilaya_name}')
+            return redirect(f'/hotels/?wilaya={wilaya}')
 
         elif category == 'places':
-            return redirect(f'/places/?wilaya={wilaya_name}')
+            return redirect(f'/places/?wilaya={wilaya}')
 
     return render(request, 'core/categories.html', {
-        'wilaya_name': wilaya_name,
+        'wilaya': wilaya,
         'show_footer': False
     })

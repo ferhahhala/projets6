@@ -305,7 +305,8 @@ select#wilayaSelect:focus {
 }
 
 /* ================= RESPONSIVE ================= */
-@media(max-width:900px){
+
+@media(max-width:479px){
     .navbar{
         flex-direction:column;
         gap:15px;
@@ -313,18 +314,12 @@ select#wilayaSelect:focus {
     .menu a{
         margin-left:15px;
     }
-    .hero h1{
-        font-size:36px;
-    }
-}
-
-@media(max-width:600px){
     .hero{
         min-height: auto; /* ✅ مهم */
         padding: 40px 15px;
     }
     .hero h1{
-        font-size:28px;
+        font-size:36px;
     }
     select#wilayaSelect {
         width:100%;

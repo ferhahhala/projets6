@@ -279,7 +279,7 @@ font-size:13px;
 
 /* ================= RESPONSIVE ================= */
 
-@media(max-width:900px){
+@media(max-width:479px){
     .navbar{
         flex-direction:column;
         gap:15px;
@@ -287,19 +287,13 @@ font-size:13px;
     .menu a{
         margin-left:15px;
     }
-    .hero h1{
-        font-size:36px;
-    }
-}
-
-@media(max-width:600px){
     .hero{
         height:50vh;
     }
     .hero h1{
-        font-size:28px;
+        font-size:36px;
     }
-    .hotels-container{
+     .hotels-container{
         grid-template-columns:1fr;
     }
     .search-box input{

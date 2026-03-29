@@ -9,9 +9,9 @@
 
 {% block hero %}
 <section class="hero">
-    <h1 class="fade-in">Bienvenue à {{ wilaya_name|default:"la Wilaya" }}</h1>
+    <h1 class="fade-in">Bienvenue à {{ wilaya|default:"la Wilaya" }}</h1>
     <p class="home-desc fade-in">
-    Choisissez une catégorie pour explorez les meilleurs endroits de votre wilaya : hôtels, restaurants et lieux incontournables.
+    Choisissez une catégorie pour explorez les meilleurs endroits de {{ wilaya|default:"la Wilaya" }} : hôtels, restaurants et lieux incontournables.
 </p>
 </section>
 {% endblock %}

@@ -13,7 +13,7 @@
     <div class="hero-content">
         <span class="tag">EXPLORER L'ALGÉRIE</span>
         <h1 class="fade-in">{{ category_name }} de {{ wilaya|default:"la Wilaya" }}</h1>
-        <p class="fade-in">Découvrez les meilleurs {{ category_name|lower }} de la ville.</p>
+        <p class="fade-in">Découvrez les meilleurs {{ category_name|lower }} de {{ wilaya|default:"la Wilaya" }}.</p>
     </div>
 </section>
 {% endblock %}
@@ -21,7 +21,7 @@
 {% block content %}
 
 <!-- ✅ FILTER يظهر غير في Hotels -->
-{% if category_name == "Hotels" %}
+{% if category_name|lower == "hotels" %}
 <!-- 🔥 HOTELS FILTER -->
 <section class="filter-section">
   <form method="GET" class="glass-filter">

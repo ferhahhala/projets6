@@ -221,18 +221,16 @@ body {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 479px) {
     .hotels-container {
         grid-template-columns: 1fr;
         padding: 20px;
     }
 
     .hero h1 {
-        font-size: 30px;
+        font-size: 36px;
     }
-}
-@media (max-width: 768px) {
-    .glass-filter {
+     .glass-filter {
         flex-direction: column;
         width: 90%;
     }
