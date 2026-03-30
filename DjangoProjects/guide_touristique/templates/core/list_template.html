@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'core/base.html' %}
 {% load static %}
 
 {% block title %}{{ category_name }} - {{ wilaya|default:"Algérie" }}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/hotels.css' %}">
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
 {% endblock %}
 
 <!-- HERO -->
@@ -13,48 +13,16 @@
     <div class="hero-content">
         <span class="tag">EXPLORER L'ALGÉRIE</span>
         <h1 class="fade-in">{{ category_name }} de {{ wilaya|default:"la Wilaya" }}</h1>
-        <p class="fade-in">Découvrez les meilleurs {{ category_name|lower }} de {{ wilaya|default:"la Wilaya" }}.</p>
+        <p class="fade-in">
+            Découvrez les meilleurs {{ category_name|lower }} de {{ wilaya|default:"la Wilaya" }}.
+        </p>
     </div>
 </section>
 {% endblock %}
 
 {% block content %}
 
-<!-- ✅ FILTER يظهر غير في Hotels -->
-{% if category_name|lower == "hotels" %}
-<!-- 🔥 HOTELS FILTER -->
-<section class="filter-section">
-  <form method="GET" class="glass-filter">
-
-    <input type="hidden" name="wilaya" value="{{ wilaya }}">
-
-    <div class="input-group">
-      <span>🔍</span>
-      <input 
-        type="text" 
-        name="q" 
-        placeholder="Rechercher hôtel..." 
-        value="{{ query }}"
-      >
-    </div>
-
-    <div class="input-group">
-      <span>💰</span>
-      <input 
-        type="number" 
-        name="max_price" 
-        placeholder="Prix max" 
-        value="{{ max_price }}"
-      >
-    </div>
-
-    <button type="submit">Filtrer</button>
-
-  </form>
-</section>
-
-{% else %}
-<!-- 🍔 RESTO / FASTFOOD FILTER -->
+<!-- FILTER -->
 <section class="filter-section">
   <form method="GET" class="glass-filter">
 
@@ -70,11 +38,28 @@
       >
     </div>
 
-    <button type="submit">Rechercher</button>
+    {% if category_name|lower == "hotels" %}
+    <div class="input-group">
+      <span>💰</span>
+      <input 
+        type="number" 
+        name="max_price" 
+        placeholder="Prix max" 
+        value="{{ max_price }}"
+      >
+    </div>
+    {% endif %}
+
+    <button type="submit" class="filter-btn">
+        {% if category_name|lower == "hotels" %}
+            Filtrer
+        {% else %}
+            Rechercher
+        {% endif %}
+    </button>
 
   </form>
 </section>
-{% endif %}
 
 <!-- TITLE -->
 <section class="section-title">
@@ -82,11 +67,11 @@
 </section>
 
 <!-- CARDS -->
-<section class="hotels">
-    <div class="hotels-container">
+<section class="list">
+    <div class="list-container">
 
         {% for item in items %}
-        <div class="hotel-card">
+        <div class="card">
 
             {% if item.price %}
                 <p class="price-badge">{{ item.price }} DA</p>
@@ -98,7 +83,7 @@
                 <img src="{% static 'images/default-hotel.jpg' %}">
             {% endif %}
 
-            <div class="hotel-content">
+            <div class="card-content">
                 <h3>{{ item.name }}</h3>
 
                 {% if item.description %}

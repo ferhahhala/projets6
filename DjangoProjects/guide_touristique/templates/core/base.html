@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ALGuide{% endblock %}</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Page CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="header">
+    <div class="navbar">
+        <div class="logo">
+            ALGuide <span><i class="fa-solid fa-plane"></i></span>
+        </div>
+
+        <nav class="menu">
+            <a href="{% url 'home' %}">Accueil</a>
+            <a href="#">À propos</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+{% block hero %}{% endblock %}
+
+<!-- MAIN CONTENT -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+{% if show_footer %}
+<footer class="footer">
+    <div class="footer-container">
+
+        <!-- COLONNE 1 -->
+        <div class="footer-col">
+            <h3>ALGuide</h3>
+            <p>
+                Votre portail premium pour découvrir la beauté, la culture et les hôtels de Tlemcen.
+            </p>
+        </div>
+
+        <!-- COLONNE 2 -->
+        <div class="footer-col">
+            <h3>Liens rapides</h3>
+
+            <a href="{% url 'home' %}">Accueil</a>
+
+            {% if wilaya %}
+                <a href="{% url 'hotel_list' %}?wilaya={{ wilaya }}">Hôtels</a>
+                <a href="{% url 'restaurant_list' %}?wilaya={{ wilaya }}&type=restaurant">Restaurants</a>
+                <a href="{% url 'restaurant_list' %}?wilaya={{ wilaya }}&type=fastfood">Fast Food</a>
+                <a href="{% url 'place_list' %}?wilaya={{ wilaya }}">Places</a>
+            {% endif %}
+        </div>
+
+        <!-- COLONNE 3 -->
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <p>contact@guide-tlemcen.dz</p>
+            <p>+213 XX XX XX XX</p>
+        </div>
+
+    </div>
+
+    <!-- BAS DU FOOTER -->
+    <div class="footer-bottom">
+        © 2026 ALGuide - Guide Touristique Algérie
+    </div>
+</footer>
+
+{% else %}
+<div class="footer-mini">
+    © 2026 ALGuide - Guide Touristique Algérie
+</div>
+{% endif %}
+
+<!-- JS -->
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

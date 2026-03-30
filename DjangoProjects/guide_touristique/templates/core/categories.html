@@ -1,18 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'core/base.html' %}
 {% load static %}
 
 {% block title %}Catégories | ALGuide{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/categorie.css' %}">
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
 {% endblock %}
 
 {% block hero %}
 <section class="hero">
-    <h1 class="fade-in">Bienvenue à {{ wilaya|default:"la Wilaya" }}</h1>
-    <p class="home-desc fade-in">
-    Choisissez une catégorie pour explorez les meilleurs endroits de {{ wilaya|default:"la Wilaya" }} : hôtels, restaurants et lieux incontournables.
-</p>
+    <div class="hero-content">
+        <h1 class="fade-in">Bienvenue à Tlemcen</h1>
+        <p class="fade-in">Choisissez une catégorie pour explorer les meilleurs endroits de Tlemcen.</p>
+    </div>
 </section>
 {% endblock %}
 
@@ -20,24 +20,24 @@
 <section class="categories">
     <form method="post">
         {% csrf_token %}
-        <input type="hidden" name="wilaya" value="{{ wilaya_name }}">
+        <input type="hidden" name="wilaya" value="{{ wilaya }}">
 
-        <div class="card" onclick="selectCategory('hotels')">
+        <div class="category-card" onclick="selectCategory('hotels')">
             <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
             <h3>Hôtels</h3>
         </div>
 
-        <div class="card" onclick="selectCategory('restaurants')">
+        <div class="category-card" onclick="selectCategory('restaurants')">
             <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de">
             <h3>Restaurants</h3>
         </div>
 
-        <div class="card" onclick="selectCategory('fastfood')">
+        <div class="category-card" onclick="selectCategory('fastfood')">
             <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
             <h3>Fast Food</h3>
         </div>
 
-        <div class="card" onclick="selectCategory('places')">
+        <div class="category-card" onclick="selectCategory('places')">
             <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
             <h3>Places</h3>
         </div>
